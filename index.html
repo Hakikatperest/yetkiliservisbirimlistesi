@@ -405,6 +405,159 @@
             opacity: 0.8;
         }
         
+        /* Fixed Call Button */
+        .fixed-call-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background-color: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(26, 107, 179, 0.4);
+            z-index: 999;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        .fixed-call-button:hover {
+            background-color: var(--dark-blue);
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(26, 107, 179, 0.6);
+        }
+        
+        .fixed-call-button i {
+            font-size: 2rem;
+            color: var(--white);
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(26, 107, 179, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(26, 107, 179, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(26, 107, 179, 0);
+            }
+        }
+        
+        /* Call Bubble */
+        .call-bubble {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            z-index: 998;
+            width: 300px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            display: none;
+        }
+        
+        .call-bubble.active {
+            opacity: 1;
+            transform: translateY(0);
+            display: block;
+        }
+        
+        .call-bubble:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 30px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid var(--white);
+        }
+        
+        .call-bubble-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .call-bubble-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--light-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .call-bubble-icon i {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+        }
+        
+        .call-bubble-text h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--dark-blue);
+        }
+        
+        .call-bubble-text p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .call-bubble-phone {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .call-bubble-phone:hover {
+            background-color: var(--dark-blue);
+        }
+        
+        .call-bubble-phone i {
+            margin-right: 10px;
+        }
+        
+        .call-bubble-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            cursor: pointer;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .call-bubble-close:hover {
+            background-color: var(--gray-light);
+        }
+        
         /* Responsive Styles */
         @media (max-width: 992px) {
             .hero h1 {
@@ -445,6 +598,23 @@
             .call-center-box {
                 padding: 30px 20px;
             }
+            
+            .fixed-call-button {
+                width: 60px;
+                height: 60px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .fixed-call-button i {
+                font-size: 1.7rem;
+            }
+            
+            .call-bubble {
+                bottom: 90px;
+                right: 20px;
+                width: 280px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -463,6 +633,11 @@
             .cta-button, .call-button {
                 padding: 14px 30px;
                 font-size: 1.1rem;
+            }
+            
+            .call-bubble {
+                width: 260px;
+                right: 10px;
             }
         }
     </style>
@@ -615,7 +790,86 @@
         </div>
     </footer>
 
+    <!-- Fixed Call Button -->
+    <div class="fixed-call-button" id="fixedCallButton">
+        <i class="fas fa-phone-alt"></i>
+    </div>
+
+    <!-- Call Bubble -->
+    <div class="call-bubble" id="callBubble">
+        <button class="call-bubble-close" id="closeBubble">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="call-bubble-header">
+            <div class="call-bubble-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+            <div class="call-bubble-text">
+                <h3>Servis Çağırmak için Hemen Arayın</h3>
+                <p>7/24 aktif çağrı merkezimiz</p>
+            </div>
+        </div>
+        <a href="tel:02425043444" class="call-bubble-phone">
+            <i class="fas fa-phone-alt"></i> 0242 504 34 44
+        </a>
+    </div>
+
     <script>
+        // Sayfa yüklendiğinde balonu göster
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sayfanın yüklendiğini kontrol etmek için 1 saniye bekle
+            setTimeout(function() {
+                showCallBubble();
+            }, 1500);
+            
+            // Sabit arama butonuna tıklama
+            document.getElementById('fixedCallButton').addEventListener('click', function() {
+                window.location.href = 'tel:02425043444';
+            });
+            
+            // Balonu kapatma
+            document.getElementById('closeBubble').addEventListener('click', function() {
+                hideCallBubble();
+            });
+            
+            // Balon dışına tıklanınca kapatma
+            document.addEventListener('click', function(event) {
+                const bubble = document.getElementById('callBubble');
+                const button = document.getElementById('fixedCallButton');
+                
+                // Eğer tıklanan element balon veya buton değilse ve balon aktifse
+                if (!bubble.contains(event.target) && event.target !== button && !button.contains(event.target)) {
+                    if (bubble.classList.contains('active')) {
+                        hideCallBubble();
+                    }
+                }
+            });
+            
+            // Balonu gösterme fonksiyonu
+            function showCallBubble() {
+                const bubble = document.getElementById('callBubble');
+                bubble.classList.add('active');
+                
+                // 8 saniye sonra otomatik kapat
+                setTimeout(function() {
+                    if (bubble.classList.contains('active')) {
+                        hideCallBubble();
+                    }
+                }, 8000);
+            }
+            
+            // Balonu gizleme fonksiyonu
+            function hideCallBubble() {
+                const bubble = document.getElementById('callBubble');
+                bubble.classList.remove('active');
+                
+                // Balon kapandıktan 30 saniye sonra tekrar göster
+                setTimeout(function() {
+                    showCallBubble();
+                }, 30000);
+            }
+        });
+        
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
