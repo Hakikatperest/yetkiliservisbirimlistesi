@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servis Çağrı Merkezi - 7/24 Hizmet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #1a6bb3;
+            --secondary-blue: #2c8ae6;
+            --light-blue: #e8f4ff;
+            --dark-blue: #0d4d8c;
+            --accent-blue: #5ab1ff;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #ffffff;
+            --gray-light: #f5f9ff;
+            --shadow: rgba(26, 107, 179, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--gray-light);
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 4px 12px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+        }
+        
+        .logo-text span {
+            color: var(--primary-blue);
+        }
+        
+        .contact-header {
+            display: flex;
+            align-items: center;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(26, 107, 179, 0.3);
+        }
+        
+        .contact-header:hover {
+            background-color: var(--dark-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(26, 107, 179, 0.4);
+        }
+        
+        .contact-header i {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        
+        .phone-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--white);
+            color: var(--primary-blue);
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-button:hover {
+            background-color: var(--light-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        .cta-button i {
+            margin-right: 10px;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-blue);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 8px 20px var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(26, 107, 179, 0.2);
+        }
+        
+        .feature-icon {
+            background-color: var(--light-blue);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .feature-icon i {
+            font-size: 2rem;
+            color: var(--primary-blue);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Service Section */
+        .services {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+        
+        .service-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .service-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .service-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Call Center Section */
+        .call-center {
+            padding: 80px 0;
+            background-color: var(--light-blue);
+            text-align: center;
+        }
+        
+        .call-center-box {
+            background-color: var(--white);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+        
+        .call-center-icon {
+            background-color: var(--light-blue);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+        }
+        
+        .call-center-icon i {
+            font-size: 3.5rem;
+            color: var(--primary-blue);
+        }
+        
+        .call-center-box h2 {
+            font-size: 2.2rem;
+        }
+        
+        .call-center-box p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: var(--text-light);
+        }
+        
+        .call-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(26, 107, 179, 0.3);
+        }
+        
+        .call-button:hover {
+            background-color: var(--dark-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(26, 107, 179, 0.4);
+        }
+        
+        .call-button i {
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        /* Mission Section */
+        .mission {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+        
+        .mission-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .mission-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+        
+        .mission-content p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            color: var(--text-light);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent-blue);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-contact {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .footer-contact i {
+            font-size: 1.2rem;
+            color: var(--accent-blue);
+            margin-right: 15px;
+            width: 20px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .phone-number {
+                font-size: 1.3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .features, .services, .call-center, .mission {
+                padding: 60px 0;
+            }
+            
+            .call-center-box {
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contact-header {
+                padding: 10px 20px;
+            }
+            
+            .phone-number {
+                font-size: 1.1rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-button, .call-button {
+                padding: 14px 30px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-tools"></i>
+                <div class="logo-text">Servis<span>Merkezi</span></div>
+            </div>
+            <a href="tel:02425043444" class="contact-header">
+                <i class="fas fa-phone-alt"></i>
+                <div class="phone-number">0242 504 34 44</div>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>7/24 Servis Hizmeti ile Yanınızdayız</h1>
+            <p>En yakın servis noktamıza ulaşmak için haftanın her günü, dilediğiniz saatte bize ulaşabilirsiniz. Uzman ekibimiz ve modern ekipmanlarımızla sorunlarınıza hızlı çözümler sunuyoruz.</p>
+            <a href="tel:02425043444" class="cta-button">
+                <i class="fas fa-phone-alt"></i> Hemen Ara
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Neden Bizi Tercih Etmelisiniz?</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <h3>Uzman Kadro</h3>
+                    <p>Alanında uzmanlaşmış teknisyenlerden oluşan bir ekip ağına sahibiz. Modern ekipmanlar kullanarak cihazlarınızın arızaları için çözüm üretiyoruz.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <h3>Memnuniyet Odaklı</h3>
+                    <p>Müşteri memnuniyetini ön planda tutuyor, ihtiyaçlarınıza uygun çözümler sunmak için çaba harcıyoruz. Hızlı geri dönüş ve şeffaf iletişim sunuyoruz.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Teknolojik Gelişmeler</h3>
+                    <p>Sektördeki son gelişmeleri yakından takip ediyor, personelimizi sürekli eğitiyoruz. Bu sayede en güncel ve etkili çözümleri sunuyoruz.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Güvenilirlik ve Kalite</h3>
+                    <p>Müşterilerimizin cihazlarını güvenle teslim edebileceği bir servis merkezi olma hedefiyle hareket ediyoruz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Section -->
+    <section class="services">
+        <div class="container">
+            <div class="service-content">
+                <div class="service-text">
+                    <h2>En Yakın Servis Noktası</h2>
+                    <p>Servis birimimiz, en yakın servis noktası için size hızlı ve etkili çözümler sunar. Uzman kadromuz ve teknolojik altyapımızla cihazlarınızın arızalarını en kısa sürede gideriyoruz.</p>
+                    <p>Müşteri memnuniyetini ön planda tutan servis birimimiz, ihtiyaçlarınıza uygun çözümler sunmak için çaba harcar. Hızlı geri dönüş süreleri, şeffaf iletişim ve güler yüzlü hizmet anlayışıyla müşterilerimize güven veririz.</p>
+                    <p>Sektördeki son gelişmeleri yakından takip eder ve personelimizi sürekli olarak eğitiriz. Bu sayede, müşterilerimize her zaman en güncel ve etkili çözümleri sunarız.</p>
+                </div>
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Servis merkezi ekibi çalışırken">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call Center Section -->
+    <section class="call-center">
+        <div class="container">
+            <div class="call-center-box">
+                <div class="call-center-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h2>7/24 Çağrı Merkezi Hizmeti</h2>
+                <p>Servis firmamıza, websitemizde yer alan çağrı merkezi numaralarından haftanın her günü dilediğiniz saatte ulaşabilirsiniz. En yakın servis noktasına yönlendirilmeniz için hemen arayın.</p>
+                <a href="tel:02425043444" class="call-button">
+                    <i class="fas fa-phone-alt"></i> 0242 504 34 44
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission">
+        <div class="container">
+            <div class="mission-content">
+                <h2>Şirket Misyonumuz</h2>
+                <p>Markamız, müşteri odaklı yaklaşımı, kaliteli hizmet anlayışı ve zamanında çözümler sunma prensibiyle sektörde kendine sağlam bir yer edinmiştir. Cihazlarınızın arızaları için 7/24 aktif çağrı merkezimizden bizlere ulaşabilirsiniz.</p>
+                <p>Sunduğumuz servis hizmetlerinde kullanılan ekipmanlar ve yedek parçalar, ilgili güvenlik standartlarına uygun olarak temin edilmektedir. Ayrıca servis işlemleri sırasında her türlü güvenlik önlemi alınmakta ve işlem sonrası cihazların güvenli bir şekilde çalıştığından emin olunmaktadır.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Servis Merkezi</h3>
+                    <p>Müşteri odaklı yaklaşımımız ve kaliteli hizmet anlayışımızla cihazlarınızın arızalarına hızlı ve güvenilir çözümler sunuyoruz.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>İletişim</h3>
+                    <div class="footer-contact">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>0242 504 34 44</span>
+                    </div>
+                    <div class="footer-contact">
+                        <i class="fas fa-clock"></i>
+                        <span>7/24 Çağrı Merkezi</span>
+                    </div>
+                    <div class="footer-contact">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>En Yakın Servis Noktası İçin Arayın</span>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Hizmetlerimiz</h3>
+                    <ul style="list-style: none; color: rgba(255,255,255,0.8);">
+                        <li style="margin-bottom: 10px;">• En Yakın Servis Noktası</li>
+                        <li style="margin-bottom: 10px;">• Uzman Teknisyen Kadrosu</li>
+                        <li style="margin-bottom: 10px;">• 7/24 Çağrı Merkezi</li>
+                        <li style="margin-bottom: 10px;">• Güvenilir Servis Hizmeti</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Servis Merkezi. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add animation to feature cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+        
+        // Phone number click tracking
+        document.querySelectorAll('a[href^="tel:"]').forEach(phoneLink => {
+            phoneLink.addEventListener('click', function() {
+                // Here you could add analytics tracking
+                console.log('Telefon numarasına tıklandı: ' + this.getAttribute('href'));
+            });
+        });
+    </script>
+</body>
+</html>
